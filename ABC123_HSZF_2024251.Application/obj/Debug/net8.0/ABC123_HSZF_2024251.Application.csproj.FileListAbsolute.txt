@@ -1,0 +1,17 @@
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\bin\Debug\net8.0\ABC123_HSZF_2024251.Application.deps.json
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\bin\Debug\net8.0\ABC123_HSZF_2024251.Application.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\bin\Debug\net8.0\ABC123_HSZF_2024251.Application.pdb
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\bin\Debug\net8.0\ABC123_HSZF_2024251.Model.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\bin\Debug\net8.0\ABC123_HSZF_2024251.Persistence.MsSql.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\bin\Debug\net8.0\ABC123_HSZF_2024251.Model.pdb
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\bin\Debug\net8.0\ABC123_HSZF_2024251.Persistence.MsSql.pdb
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_HSZF_2024251.Application.csproj.AssemblyReference.cache
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_HSZF_2024251.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_HSZF_2024251.Application.AssemblyInfoInputs.cache
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_HSZF_2024251.Application.AssemblyInfo.cs
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_HSZF_2024251.Application.csproj.CoreCompileInputs.cache
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_H.C10918D5.Up2Date
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_HSZF_2024251.Application.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\refint\ABC123_HSZF_2024251.Application.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_HSZF_2024251.Application.pdb
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ref\ABC123_HSZF_2024251.Application.dll

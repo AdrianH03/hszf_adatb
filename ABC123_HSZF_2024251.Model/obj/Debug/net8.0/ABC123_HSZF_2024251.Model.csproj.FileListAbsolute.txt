@@ -1,0 +1,11 @@
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\bin\Debug\net8.0\ABC123_HSZF_2024251.Model.deps.json
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\bin\Debug\net8.0\ABC123_HSZF_2024251.Model.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\bin\Debug\net8.0\ABC123_HSZF_2024251.Model.pdb
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\obj\Debug\net8.0\ABC123_HSZF_2024251.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\obj\Debug\net8.0\ABC123_HSZF_2024251.Model.AssemblyInfoInputs.cache
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\obj\Debug\net8.0\ABC123_HSZF_2024251.Model.AssemblyInfo.cs
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\obj\Debug\net8.0\ABC123_HSZF_2024251.Model.csproj.CoreCompileInputs.cache
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\obj\Debug\net8.0\ABC123_HSZF_2024251.Model.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\obj\Debug\net8.0\refint\ABC123_HSZF_2024251.Model.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\obj\Debug\net8.0\ABC123_HSZF_2024251.Model.pdb
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\obj\Debug\net8.0\ref\ABC123_HSZF_2024251.Model.dll
