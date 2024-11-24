@@ -33,19 +33,18 @@ namespace ABC123_HSZF_2024251.Application.Services
                 );
         }
 
-        public async Task<Dictionary<string, Fare>> GetLongestAndShortestTripAsync()
+        public async Task<Dictionary<string, (Fare LongestTrip, Fare ShortestTrip)>> GetLongestAndShortestTripAsync()
         {
             return await _context.TaxiCars
+                .Select(car => new
+                {
+                    car.LicensePlate,
+                    LongestTrip = car.Fares.OrderByDescending(f => f.Distance).FirstOrDefault(),
+                    ShortestTrip = car.Fares.OrderBy(f => f.Distance).FirstOrDefault()
+                })
                 .ToDictionaryAsync(
                     car => car.LicensePlate,
-                    car => new Fare
-                    {
-                        From = car.Fares.OrderBy(f => f.Distance).FirstOrDefault()?.From,
-                        To = car.Fares.OrderBy(f => f.Distance).FirstOrDefault()?.To,
-                        Distance = car.Fares.OrderBy(f => f.Distance).FirstOrDefault()?.Distance ?? 0,
-                        PaidAmount = car.Fares.OrderBy(f => f.Distance).FirstOrDefault()?.PaidAmount ?? 0
-                    }
-                );
+                    car => (car.LongestTrip, car.ShortestTrip));
         }
 
         public async Task<Dictionary<string, string>> GetMostCommonDestinationAsync()
@@ -68,37 +67,43 @@ namespace ABC123_HSZF_2024251.Application.Services
 
             StringBuilder sb = new StringBuilder();
 
-            // Kiírás a konzolra vagy fájlba
+            // Short trips
             sb.AppendLine("Short Trips Count (< 10 km):");
             foreach (var entry in shortTripsCount)
             {
                 sb.AppendLine($"{entry.Key}: {entry.Value}");
             }
 
+            // Average distance
             sb.AppendLine("\nAverage Distance:");
             foreach (var entry in averageDistance)
             {
                 sb.AppendLine($"{entry.Key}: {entry.Value:F2} km");
             }
 
+            // Longest and shortest trips
             sb.AppendLine("\nLongest and Shortest Trips:");
             foreach (var entry in longestAndShortestTrips)
             {
-                (Fare longestTrip, Fare shortestTrip) = entry.Value;
+                // Dekonstruálás explicit tuple típusokkal
+                var (longestTrip, shortestTrip) = entry.Value;
+
                 sb.AppendLine($"{entry.Key}: Longest trip: {longestTrip?.Distance} km, Shortest trip: {shortestTrip?.Distance} km");
             }
 
+            // Most common destination
             sb.AppendLine("\nMost Common Destination:");
             foreach (var entry in mostCommonDestinations)
             {
                 sb.AppendLine($"{entry.Key}: {entry.Value}");
             }
 
-            // Például fájlba mentés
+            // Write to file
             await File.WriteAllTextAsync("TaxiStatistics.txt", sb.ToString());
 
-            // Vagy kiírás a konzolra (opcionális)
+            // Output to console
             Console.WriteLine(sb.ToString());
         }
+
     }
 }

@@ -1,4 +1,5 @@
 C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\bin\Debug\net8.0\ABC123_HSZF_2024251.Persistence.MsSql.deps.json
+C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\bin\Debug\net8.0\ABC123_HSZF_2024251.Persistence.MsSql.runtimeconfig.json
 C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\bin\Debug\net8.0\ABC123_HSZF_2024251.Persistence.MsSql.dll
 C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\bin\Debug\net8.0\ABC123_HSZF_2024251.Persistence.MsSql.pdb
 C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\bin\Debug\net8.0\ABC123_HSZF_2024251.Model.dll
@@ -8,8 +9,10 @@ C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\obj\Debug\net8.0\ABC123_
 C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\obj\Debug\net8.0\ABC123_HSZF_2024251.Persistence.MsSql.AssemblyInfoInputs.cache
 C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\obj\Debug\net8.0\ABC123_HSZF_2024251.Persistence.MsSql.AssemblyInfo.cs
 C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\obj\Debug\net8.0\ABC123_HSZF_2024251.Persistence.MsSql.csproj.CoreCompileInputs.cache
+C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\obj\Debug\net8.0\ABC123_HSZF_2024251.Persistence.MsSql.sourcelink.json
 C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\obj\Debug\net8.0\ABC123_H.AB901D47.Up2Date
 C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\obj\Debug\net8.0\ABC123_HSZF_2024251.Persistence.MsSql.dll
 C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\obj\Debug\net8.0\refint\ABC123_HSZF_2024251.Persistence.MsSql.dll
 C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\obj\Debug\net8.0\ABC123_HSZF_2024251.Persistence.MsSql.pdb
+C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\obj\Debug\net8.0\ABC123_HSZF_2024251.Persistence.MsSql.genruntimeconfig.cache
 C:\Projektek\hszf\ABC123_HSZF_2024251.Persistence.MsSql\obj\Debug\net8.0\ref\ABC123_HSZF_2024251.Persistence.MsSql.dll

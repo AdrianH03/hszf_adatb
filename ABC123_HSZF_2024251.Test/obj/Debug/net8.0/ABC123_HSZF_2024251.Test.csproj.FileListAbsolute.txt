@@ -17,3 +17,4 @@ C:\Projektek\hszf\ABC123_HSZF_2024251.Test\obj\Debug\net8.0\ABC123_HSZF_2024251.
 C:\Projektek\hszf\ABC123_HSZF_2024251.Test\obj\Debug\net8.0\refint\ABC123_HSZF_2024251.Test.dll
 C:\Projektek\hszf\ABC123_HSZF_2024251.Test\obj\Debug\net8.0\ABC123_HSZF_2024251.Test.pdb
 C:\Projektek\hszf\ABC123_HSZF_2024251.Test\obj\Debug\net8.0\ref\ABC123_HSZF_2024251.Test.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Test\obj\Debug\net8.0\ABC123_HSZF_2024251.Test.sourcelink.json

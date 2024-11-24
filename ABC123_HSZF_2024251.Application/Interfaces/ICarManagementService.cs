@@ -9,6 +9,7 @@ namespace ABC123_HSZF_2024251.Application.Interfaces
         Task DeleteCarAsync(string licensePlate);
         Task AddFareAsync(string licensePlate, Fare fare);
         Task<List<TaxiCar>> GetCarsAsync();  // Az összes autó lekérdezésére szolgáló metódus
+        Task<TaxiCar?> GetCarByLicensePlateAsync(string licensePlate);
 
     }
 }

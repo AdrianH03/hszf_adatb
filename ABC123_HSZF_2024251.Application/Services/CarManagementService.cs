@@ -56,5 +56,9 @@ namespace ABC123_HSZF_2024251.Application.Services
                 .Include(tc => tc.Fares)
                 .ToListAsync();
         }
+        public async Task<TaxiCar?> GetCarByLicensePlateAsync(string licensePlate)
+        {
+            return await _context.TaxiCars.FirstOrDefaultAsync(c => c.LicensePlate == licensePlate);
+        }
     }
 }

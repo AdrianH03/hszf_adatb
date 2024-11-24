@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using ABC123_HSZF_2024251.Model;
+using System.Text.Json;
 
 class Program
 {
@@ -16,7 +17,8 @@ class Program
             {
                 // DbContext regisztráció
                 services.AddDbContext<TaxiDbContext>(options =>
-                    options.UseSqlite("Data Source=TaxiDatabase.db"));
+                    options.UseSqlite("Data Source=C:\\Projektek\\hszf\\ABC123_HSZF_2024251.Persistence.MsSql\\TaxiDatabase.db",
+                    sqliteOptions => sqliteOptions.MigrationsAssembly("ABC123_HSZF_2024251.Persistence.MsSql")));
 
                 // Szolgáltatások regisztrációja
                 services.AddScoped<IDataImporterService, DataImporterService>();
@@ -48,6 +50,7 @@ class Program
         bool exit = false;
         while (!exit)
         {
+            Console.WriteLine("\n------------------------------------");
             Console.WriteLine("Taxi Management System");
             Console.WriteLine("1. JSON fájl betöltése");
             Console.WriteLine("2. Autók listázása");
@@ -57,6 +60,7 @@ class Program
             Console.WriteLine("6. Új út hozzáadása");
             Console.WriteLine("7. Statisztikák generálása");
             Console.WriteLine("8. Kilépés");
+            Console.WriteLine("------------------------------------");
             Console.Write("Válassz egy opciót: ");
 
             var input = Console.ReadLine();
@@ -81,7 +85,7 @@ class Program
                     await AddFareAsync(carManager);
                     break;
                 case "7":
-                    //await GenerateStatisticsAsync(statisticsService);
+                    await GenerateStatisticsAsync(statisticsService);
                     break;
                 case "8":
                     exit = true;
@@ -110,10 +114,19 @@ class Program
             await dataImporter.ImportDataAsync(filePath);
             Console.WriteLine("Adatok sikeresen betöltve.");
         }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("A megadott fájl nem található.");
+        }
+        catch (JsonException)
+        {
+            Console.WriteLine("Hiba a JSON fájl feldolgozása során. Ellenőrizd a fájl formátumát.");
+        }
         catch (Exception ex)
         {
-            Console.WriteLine($"Hiba történt: {ex.Message}");
+            Console.WriteLine($"Ismeretlen hiba történt: {ex.Message}");
         }
+
     }
 
     static async Task ListCarsAsync(ICarManagementService carManager)
@@ -133,6 +146,12 @@ class Program
         Console.Write("Add meg a sofőr nevét: ");
         var driver = Console.ReadLine();
 
+        if (string.IsNullOrEmpty(licensePlate) || string.IsNullOrEmpty(driver))
+        {
+            Console.WriteLine("A rendszám és a sofőr megadása kötelező.");
+            return;
+        }
+
         await carManager.AddCarAsync(new TaxiCar
         {
             LicensePlate = licensePlate,
@@ -147,13 +166,19 @@ class Program
         Console.Write("Add meg a módosítandó autó rendszámát: ");
         var licensePlate = Console.ReadLine();
 
+        var car = await carManager.GetCarByLicensePlateAsync(licensePlate);
+        if (car == null)
+        {
+            Console.WriteLine("A megadott autó nem található.");
+            return;
+        }
+
         Console.Write("Add meg az új sofőr nevét: ");
         var newDriver = Console.ReadLine();
 
-        TaxiCar car = new TaxiCar();
-        car.LicensePlate = licensePlate;
         car.Driver = newDriver;
         await carManager.UpdateCarAsync(car);
+
         Console.WriteLine("Az autó frissítve.");
     }
 
@@ -194,13 +219,17 @@ class Program
 
         Console.WriteLine("Az út hozzáadva.");
     }
-
-    /*static async Task GenerateStatisticsAsync(IStatisticsService statisticsService)
+    static async Task GenerateStatisticsAsync(IStatisticsService statisticsService)
     {
-        Console.Write("Add meg a statisztika fájl elérési útvonalát (üresen hagyva az alapértelmezettet használja): ");
-        var filePath = Console.ReadLine();
+        try
+        {
+            await statisticsService.GenerateStatisticsAsync();
+            Console.WriteLine("Statisztika generálva és mentve a TaxiStatistics.txt fájlba.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Hiba történt a statisztikák generálása során: {ex.Message}");
+        }
+    }
 
-        await statisticsService.GenerateStatisticsAsync(filePath);
-        Console.WriteLine("Statisztika generálva.");
-    }*/
 }

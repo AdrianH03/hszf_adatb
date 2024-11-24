@@ -10,6 +10,7 @@ C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_HSZF_2
 C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_HSZF_2024251.Application.AssemblyInfoInputs.cache
 C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_HSZF_2024251.Application.AssemblyInfo.cs
 C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_HSZF_2024251.Application.csproj.CoreCompileInputs.cache
+C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_HSZF_2024251.Application.sourcelink.json
 C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_H.C10918D5.Up2Date
 C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\ABC123_HSZF_2024251.Application.dll
 C:\Projektek\hszf\ABC123_HSZF_2024251.Application\obj\Debug\net8.0\refint\ABC123_HSZF_2024251.Application.dll
