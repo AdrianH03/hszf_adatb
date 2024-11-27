@@ -17,12 +17,16 @@ namespace ABC123_HSZF_2024251.Application.Services
         public async Task ImportDataAsync(string filePath)
         {
             var jsonData = await File.ReadAllTextAsync(filePath);
-            var taxiCars = JsonSerializer.Deserialize<List<TaxiCar>>(jsonData);
 
-            if (taxiCars == null)
-                throw new Exception("Invalid JSON format.");
+            // Wrapper osztály deszerializálása
+            var taxiCarsWrapper = JsonSerializer.Deserialize<TaxiCarsWrapper>(jsonData);
 
-            foreach (var car in taxiCars)
+            if (taxiCarsWrapper == null || taxiCarsWrapper.TaxiCars == null)
+            {
+                throw new Exception("Invalid JSON format or missing TaxiCars.");
+            }
+
+            foreach (var car in taxiCarsWrapper.TaxiCars)
             {
                 var existingCar = await _context.TaxiCars
                     .Include(tc => tc.Fares)
@@ -48,5 +52,6 @@ namespace ABC123_HSZF_2024251.Application.Services
 
             await _context.SaveChangesAsync();
         }
+
     }
 }

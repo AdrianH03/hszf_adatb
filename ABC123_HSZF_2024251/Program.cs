@@ -6,6 +6,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using ABC123_HSZF_2024251.Model;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
+using Microsoft.Graph.Models;
+using Microsoft.Extensions.Configuration;
 
 class Program
 {
@@ -13,12 +16,26 @@ class Program
     {
         // Host konfigurálása
         var host = Host.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                // appsettings.json betöltése
+                config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            })
+            .ConfigureLogging((hostingContext, logging) =>
+            {
+                // Naplózási szintek beállítása
+                logging.ClearProviders(); // Alapértelmezett naplózók törlése
+                logging.AddConsole(); // Konzolos naplózás
+                logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging")); // appsettings.json alkalmazása
+            })
             .ConfigureServices((context, services) =>
             {
-                // DbContext regisztráció
+                // DbContext regisztráció SQLite-tal
                 services.AddDbContext<TaxiDbContext>(options =>
-                    options.UseSqlite("Data Source=C:\\Projektek\\hszf\\ABC123_HSZF_2024251.Persistence.MsSql\\TaxiDatabase.db",
-                    sqliteOptions => sqliteOptions.MigrationsAssembly("ABC123_HSZF_2024251.Persistence.MsSql")));
+                    options.UseSqlite("Data Source=TaxiDatabase.db",
+                    sqliteOptions => sqliteOptions.MigrationsAssembly("ABC123_HSZF_2024251.Persistence.MsSql"))
+                    .LogTo(Console.WriteLine, LogLevel.Warning) // Csak figyelmeztetések és hibák
+                );
 
                 // Szolgáltatások regisztrációja
                 services.AddScoped<IDataImporterService, DataImporterService>();
@@ -27,18 +44,24 @@ class Program
             })
             .Build();
 
-        using var scope = host.Services.CreateScope();
-        var services = scope.ServiceProvider;
+        // Migrációk alkalmazása és inicializálás
+        using (var scope = host.Services.CreateScope())
+        {
+            try
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<TaxiDbContext>();
 
-        try
-        {
-            // A program belépési pontja
-            await RunApplicationAsync(services);
+                // Migrációk lefuttatása, ha szükséges
+                dbContext.Database.Migrate();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hiba az adatbázis inicializálása során: {ex.Message}");
+            }
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"An error occurred: {ex.Message}");
-        }
+
+        // Program futtatása
+        await RunApplicationAsync(host.Services);
     }
 
     static async Task RunApplicationAsync(IServiceProvider services)
@@ -109,7 +132,7 @@ class Program
             return;
         }
 
-        try
+        try     
         {
             await dataImporter.ImportDataAsync(filePath);
             Console.WriteLine("Adatok sikeresen betöltve.");
@@ -126,17 +149,58 @@ class Program
         {
             Console.WriteLine($"Ismeretlen hiba történt: {ex.Message}");
         }
-
     }
+    
+
 
     static async Task ListCarsAsync(ICarManagementService carManager)
     {
-        var cars = await carManager.GetCarsAsync();
-        foreach (var car in cars)
+        Console.WriteLine("\nKeresés autók között:");
+        Console.WriteLine("Adja meg a keresési paramétereket (Enter, ha nem ad meg semmit):");
+
+        Console.Write("Rendszám (vagy annak egy része): ");
+        var licensePlate = Console.ReadLine();
+
+        Console.Write("Sofőr neve (vagy annak egy része): ");
+        var driver = Console.ReadLine();
+
+        try
         {
-            Console.WriteLine($"Rendszám: {car.LicensePlate}, Sofőr: {car.Driver}");
+            // Keresés a megadott paraméterekkel
+            var cars = await carManager.SearchCarsAsync(licensePlate, driver);
+
+            // Az eredmények megjelenítése
+            if (cars.Any())
+            {
+                Console.WriteLine("\nTalált autók:");
+                foreach (var car in cars)
+                {
+                    Console.WriteLine($"Rendszám: {car.LicensePlate}, Sofőr: {car.Driver}");
+                    if (car.Fares.Any())
+                    {
+                        Console.WriteLine("  Viteldíjak:");
+                        foreach (var fare in car.Fares)
+                        {
+                            Console.WriteLine($"    {fare.From} -> {fare.To}, Távolság: {fare.Distance} km, Díj: {fare.PaidAmount} Ft");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("  Nincs viteldíj.");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Nem található a keresésnek megfelelő autó.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Hiba történt a keresés során: {ex.Message}");
         }
     }
+
 
     static async Task AddCarAsync(ICarManagementService carManager)
     {
@@ -208,14 +272,23 @@ class Program
         Console.Write("Add meg a viteldíjat: ");
         var paidAmount = decimal.Parse(Console.ReadLine());
 
-        await carManager.AddFareAsync(licensePlate, new Fare
+        try
         {
-            From = from,
-            To = to,
-            Distance = distance,
-            PaidAmount = paidAmount,
-            FareStartDate = DateTime.UtcNow
-        });
+            await carManager.AddFareAsync(licensePlate, new Fare
+            {
+                From = from,
+                To = to,
+                Distance = distance,
+                PaidAmount = paidAmount,
+                FareStartDate = DateTime.UtcNow
+            }, message =>
+            {
+                Console.WriteLine(message); // Eseménykezelő: értesítés megjelenítése a konzolon
+            });
+        }catch(Exception ex)
+        {
+            Console.WriteLine($"Hiba történt: {ex.Message}");
+        }
 
         Console.WriteLine("Az út hozzáadva.");
     }

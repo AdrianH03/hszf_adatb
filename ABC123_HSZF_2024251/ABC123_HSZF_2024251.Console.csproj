@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,6 +31,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Graph" Version="5.63.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,5 +39,12 @@
 	  <ProjectReference Include="..\ABC123_HSZF_2024251.Model\ABC123_HSZF_2024251.Model.csproj" />
       <ProjectReference Include="..\ABC123_HSZF_2024251.Persistence.MsSql\ABC123_HSZF_2024251.Persistence.MsSql.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<None Update="ABC123_HSZF_2024251.Persistence.MsSql\TaxiDatabase.db">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
 
 </Project>

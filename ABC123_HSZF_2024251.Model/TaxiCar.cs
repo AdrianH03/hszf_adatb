@@ -9,6 +9,6 @@ namespace ABC123_HSZF_2024251.Model
         public string Driver { get; set; } = string.Empty; // Sofőr neve
 
         // Navigációs tulajdonságok
-        public ICollection<Fare> Fares { get; set; } = new List<Fare>();
+        public List<Fare> Fares { get; set; } = new List<Fare>();
     }
 }

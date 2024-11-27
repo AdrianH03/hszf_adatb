@@ -29,9 +29,10 @@ namespace ABC123_HSZF_2024251.Application.Services
             return await _context.TaxiCars
                 .ToDictionaryAsync(
                     car => car.LicensePlate,
-                    car => car.Fares.Average(fare => fare.Distance)
+                    car => car.Fares.Any() ? car.Fares.Average(fare => fare.Distance) : 0 // Ha nincs viteldíj, 0-t adunk vissza
                 );
         }
+
 
         public async Task<Dictionary<string, (Fare LongestTrip, Fare ShortestTrip)>> GetLongestAndShortestTripAsync()
         {
