@@ -27,11 +27,15 @@ namespace ABC123_HSZF_2024251.Application.Services
         public async Task<Dictionary<string, double>> GetAverageDistanceAsync()
         {
             return await _context.TaxiCars
+                .Where(car => !string.IsNullOrWhiteSpace(car.LicensePlate)) // Üres rendszámok szűrése
                 .ToDictionaryAsync(
                     car => car.LicensePlate,
-                    car => car.Fares.Any() ? car.Fares.Average(fare => fare.Distance) : 0 // Ha nincs viteldíj, 0-t adunk vissza
+                    car => car.Fares.Any(fare => fare.Distance >= 0) // Csak nem negatív távolságokat számolunk
+                        ? car.Fares.Where(fare => fare.Distance >= 0).Average(fare => fare.Distance)
+                        : 0 // Ha nincs érvényes viteldíj, 0-t adunk vissza
                 );
         }
+
 
 
         public async Task<Dictionary<string, (Fare LongestTrip, Fare ShortestTrip)>> GetLongestAndShortestTripAsync()
