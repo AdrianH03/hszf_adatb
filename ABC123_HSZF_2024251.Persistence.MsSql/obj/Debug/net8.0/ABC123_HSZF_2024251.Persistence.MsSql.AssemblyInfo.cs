@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ABC123_HSZF_2024251.Persistence.MsSql")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a75134aa20f6adeb938b457951973d053ef31abd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dd9a6fe17bb23d5ccef6c6408a537b12be909702")]
 [assembly: System.Reflection.AssemblyProductAttribute("ABC123_HSZF_2024251.Persistence.MsSql")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ABC123_HSZF_2024251.Persistence.MsSql")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

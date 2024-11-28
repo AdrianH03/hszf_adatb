@@ -17,23 +17,25 @@ namespace ABC123_HSZF_2024251.Application.Services
 
         public async Task<Dictionary<string, int>> GetShortTripsCountAsync()
         {
-            return await _context.TaxiCars
-                .ToDictionaryAsync(
-                    car => car.LicensePlate,
-                    car => car.Fares.Count(fare => fare.Distance < 10)
-                );
+            var cars = await _context.TaxiCars.ToListAsync();
+            return cars.ToDictionary(
+                car => car.LicensePlate,
+                car => car.Fares.Count(fare => fare.Distance < 10)
+            );
         }
 
         public async Task<Dictionary<string, double>> GetAverageDistanceAsync()
         {
-            return await _context.TaxiCars
-                .Where(car => !string.IsNullOrWhiteSpace(car.LicensePlate)) // Üres rendszámok szűrése
-                .ToDictionaryAsync(
-                    car => car.LicensePlate,
-                    car => car.Fares.Any(fare => fare.Distance >= 0) // Csak nem negatív távolságokat számolunk
-                        ? car.Fares.Where(fare => fare.Distance >= 0).Average(fare => fare.Distance)
-                        : 0 // Ha nincs érvényes viteldíj, 0-t adunk vissza
-                );
+            var cars = await _context.TaxiCars
+                .Where(car => !string.IsNullOrWhiteSpace(car.LicensePlate))
+                .ToListAsync();
+
+            return cars.ToDictionary(
+                car => car.LicensePlate,
+                car => car.Fares.Any(fare => fare.Distance >= 0)
+                    ? car.Fares.Where(fare => fare.Distance >= 0).Average(fare => fare.Distance)
+                    : 0
+            );
         }
 
 
@@ -41,27 +43,23 @@ namespace ABC123_HSZF_2024251.Application.Services
         public async Task<Dictionary<string, (Fare LongestTrip, Fare ShortestTrip)>> GetLongestAndShortestTripAsync()
         {
             return await _context.TaxiCars
-                .Select(car => new
-                {
-                    car.LicensePlate,
-                    LongestTrip = car.Fares.OrderByDescending(f => f.Distance).FirstOrDefault(),
-                    ShortestTrip = car.Fares.OrderBy(f => f.Distance).FirstOrDefault()
-                })
+                .Include(car => car.Fares) // Explicit loading a Fares entitások
                 .ToDictionaryAsync(
                     car => car.LicensePlate,
-                    car => (car.LongestTrip, car.ShortestTrip));
+                    car => (car.Fares.OrderByDescending(f => f.Distance).FirstOrDefault(),
+                            car.Fares.OrderBy(f => f.Distance).FirstOrDefault()));
         }
 
         public async Task<Dictionary<string, string>> GetMostCommonDestinationAsync()
         {
             return await _context.TaxiCars
+                .Include(car => car.Fares) // Explicit loading a Fares entitások
                 .ToDictionaryAsync(
                     car => car.LicensePlate,
-                    car => car.Fares
-                        .GroupBy(f => f.To)
+                    car => car.Fares.GroupBy(f => f.To)
                         .OrderByDescending(g => g.Count())
-                        .FirstOrDefault()?.Key
-                );
+                        .Select(g => g.Key)
+                        .FirstOrDefault());
         }
         public async Task GenerateStatisticsAsync()
         {

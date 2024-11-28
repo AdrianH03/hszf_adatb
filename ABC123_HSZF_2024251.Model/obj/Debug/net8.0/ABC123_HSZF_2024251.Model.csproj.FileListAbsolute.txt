@@ -106,3 +106,8 @@ C:\Projektek\hszf\ABC123_HSZF_2024251.Model\obj\Debug\net8.0\refint\ABC123_HSZF_
 C:\Projektek\hszf\ABC123_HSZF_2024251.Model\obj\Debug\net8.0\ABC123_HSZF_2024251.Model.pdb
 C:\Projektek\hszf\ABC123_HSZF_2024251.Model\obj\Debug\net8.0\ABC123_HSZF_2024251.Model.genruntimeconfig.cache
 C:\Projektek\hszf\ABC123_HSZF_2024251.Model\obj\Debug\net8.0\ref\ABC123_HSZF_2024251.Model.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\bin\Debug\net8.0\Castle.Core.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.Messages.dll
+C:\Projektek\hszf\ABC123_HSZF_2024251.Model\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.dll

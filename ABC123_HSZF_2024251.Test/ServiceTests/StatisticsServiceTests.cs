@@ -35,11 +35,11 @@ namespace ABC123_HSZF_2024251.Test.ServiceTests
                 LicensePlate = "DEF456",
                 Driver = "Jane Smith",
                 Fares = new List<Fare>
-                {
-                    new Fare { Distance = 10 },
-                    new Fare { Distance = 20 },
-                    new Fare { Distance = 30 }
-                }
+    {
+        new Fare { Distance = 10, From = "A", To = "B" },
+        new Fare { Distance = 20, From = "C", To = "D" },
+        new Fare { Distance = 30, From = "E", To = "F" }
+    }
             };
 
             dbContext.TaxiCars.Add(car);
@@ -111,9 +111,9 @@ namespace ABC123_HSZF_2024251.Test.ServiceTests
                 Driver = "Alice Smith",
                 Fares = new List<Fare>
         {
-            new Fare { Distance = 15.0 },
-            new Fare { Distance = 5.0 },
-            new Fare { Distance = 10.0 }
+            new Fare { Distance = 15.0, From = "A", To = "B"},
+            new Fare { Distance = 5.0, From = "C", To = "D"},
+            new Fare { Distance = 10.0, From = "E", To = "F"  }
         }
             });
             await dbContext.SaveChangesAsync();
@@ -144,8 +144,8 @@ namespace ABC123_HSZF_2024251.Test.ServiceTests
                     Driver = "John Doe",
                     Fares = new List<Fare>
                     {
-                new Fare { Distance = 10.0 },
-                new Fare { Distance = 20.0 }
+                new Fare { Distance = 10.0, From = "E", To = "F" },
+                new Fare { Distance = 20.0, From = "A", To = "B" }
                     }
                 },
                 new TaxiCar
@@ -154,8 +154,8 @@ namespace ABC123_HSZF_2024251.Test.ServiceTests
                     Driver = "Jane Smith",
                     Fares = new List<Fare>
                     {
-                new Fare { Distance = 5.0 },
-                new Fare { Distance = 15.0 }
+                new Fare { Distance = 5.0, From = "C", To = "D" },
+                new Fare { Distance = 15.0, From = "A", To = "B"  }
                     }
                 }
             );
@@ -188,7 +188,7 @@ namespace ABC123_HSZF_2024251.Test.ServiceTests
                     Driver = "John Doe",
                     Fares = new List<Fare>
                     {
-                new Fare { Distance = 15.0 }
+                new Fare {Distance = 15.0, From = "A", To = "B"}
                     }
                 },
                 new TaxiCar
@@ -225,9 +225,9 @@ namespace ABC123_HSZF_2024251.Test.ServiceTests
                 Driver = "Bob Brown",
                 Fares = new List<Fare>
         {
-            new Fare { Distance = -5.0 },
-            new Fare { Distance = 15.0 },
-            new Fare { Distance = 10.0 }
+            new Fare { Distance = -5.0, From = "A", To = "B" },
+            new Fare { Distance = 15.0, From = "C", To = "D" },
+            new Fare {Distance = 10.0, From = "A", To = "B"}
         }
             });
             await dbContext.SaveChangesAsync();
@@ -256,7 +256,7 @@ namespace ABC123_HSZF_2024251.Test.ServiceTests
                 Driver = "Unnamed",
                 Fares = new List<Fare>
         {
-            new Fare { Distance = 10.0 }
+            new Fare { Distance = 10.0, From = "A", To = "B"}
         }
             });
             await dbContext.SaveChangesAsync();
@@ -286,7 +286,7 @@ namespace ABC123_HSZF_2024251.Test.ServiceTests
                     Driver = "John Doe",
                     Fares = new List<Fare>
                     {
-                new Fare { Distance = 10.0 }
+                new Fare {Distance = 10.0, From = "A", To = "B"}
                     }
                 },
                 new TaxiCar
@@ -295,7 +295,7 @@ namespace ABC123_HSZF_2024251.Test.ServiceTests
                     Driver = "Jane Smith",
                     Fares = new List<Fare>
                     {
-                new Fare { Distance = 15.0 }
+                new Fare { Distance = 15.0 , From = "C", To = "D" }
                     }
                 }
             );
@@ -326,7 +326,7 @@ namespace ABC123_HSZF_2024251.Test.ServiceTests
                     Driver = $"Driver {i}",
                     Fares = new List<Fare>
             {
-                new Fare { Distance = i * 1.0 }
+                new Fare {Distance = i * 1.0, From = "A", To = "B"}
             }
                 });
             }

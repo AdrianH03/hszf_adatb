@@ -40,9 +40,7 @@ namespace ABC123_HSZF_2024251.Application.Services
 
         public async Task AddFareAsync(string licensePlate, Fare fare, Action<string> notification)
         {
-            // Keresés az autóhoz a rendszám alapján
             var car = await _context.TaxiCars
-                .Include(tc => tc.Fares) // Betöltjük az utak listáját
                 .FirstOrDefaultAsync(tc => tc.LicensePlate == licensePlate);
 
             if (car == null)
@@ -50,18 +48,16 @@ namespace ABC123_HSZF_2024251.Application.Services
                 throw new ArgumentException($"A megadott rendszámú autó ({licensePlate}) nem található.");
             }
 
-            // Az autóhoz tartozó utak közül a legmagasabb fizetett összeg
+            // A Fares property automatikusan betöltődik a lazy loading miatt
             var maxPaidAmount = car.Fares.Any()
                 ? car.Fares.Max(f => f.PaidAmount)
                 : 0;
 
-            // Ellenőrzés: az új út költsége meghaladja-e a megengedett határt
             if (fare.PaidAmount > 2 * maxPaidAmount && maxPaidAmount > 0)
             {
                 notification?.Invoke($"Figyelem! Az új út ({fare.PaidAmount} Ft) többe került, mint az autó bármelyik eddigi útjának kétszerese ({maxPaidAmount * 2} Ft).");
             }
 
-            // Új út hozzáadása
             car.Fares.Add(fare);
             await _context.SaveChangesAsync();
         }
@@ -73,37 +69,23 @@ namespace ABC123_HSZF_2024251.Application.Services
 
         public async Task<List<TaxiCar>> SearchCarsAsync(string? licensePlate = null, string? driver = null)
         {
-            var query = _context.TaxiCars
-                .Include(tc => tc.Fares) // Kapcsolt entitások betöltése
-                .AsQueryable();
+            // Mivel van lazy loading, nem kell Include
+            var query = _context.TaxiCars.AsQueryable();
 
-            // Szűrés a rendszám alapján (kis/nagybetű figyelmen kívül hagyása)
             if (!string.IsNullOrWhiteSpace(licensePlate))
             {
                 var lowerLicensePlate = licensePlate.ToLower();
                 query = query.Where(car => car.LicensePlate.ToLower().Contains(lowerLicensePlate));
             }
 
-            // Szűrés a sofőr neve alapján (kis/nagybetű figyelmen kívül hagyása)
             if (!string.IsNullOrWhiteSpace(driver))
             {
                 var lowerDriver = driver.ToLower();
                 query = query.Where(car => car.Driver.ToLower().Contains(lowerDriver));
             }
 
-            try
-            {
-                return await query.ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Hiba történt a keresés során: {ex.Message}");
-                return new List<TaxiCar>();
-            }
+            return await query.ToListAsync();
         }
-
-
-
 
         public async Task<TaxiCar?> GetCarByLicensePlateAsync(string licensePlate)
         {

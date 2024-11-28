@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ABC123_HSZF_2024251.Test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b1a7bb8e766e38fea08b0466af1c7d84eb63592")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dd9a6fe17bb23d5ccef6c6408a537b12be909702")]
 [assembly: System.Reflection.AssemblyProductAttribute("ABC123_HSZF_2024251.Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ABC123_HSZF_2024251.Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

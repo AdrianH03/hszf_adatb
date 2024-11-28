@@ -19,13 +19,13 @@ namespace ABC123_HSZF_2024251.Application.Services
 
         public async Task<List<TaxiCar>> GetAllCarsAsync()
         {
-            return await _context.TaxiCars.Include(tc => tc.Fares).ToListAsync();
+            // Nem kell Include, mert a lazy loading működik
+            return await _context.TaxiCars.ToListAsync();
         }
 
         public async Task<TaxiCar?> GetCarByLicensePlateAsync(string licensePlate)
         {
             return await _context.TaxiCars
-                .Include(tc => tc.Fares)
                 .FirstOrDefaultAsync(tc => tc.LicensePlate == licensePlate);
         }
 
@@ -60,7 +60,8 @@ namespace ABC123_HSZF_2024251.Application.Services
             if (car.Fares.Any(f => f.FareStartDate == fare.FareStartDate))
                 throw new Exception("Fare already exists.");
 
-            if (fare.PaidAmount > car.Fares.Max(f => f.PaidAmount) * 2)
+            var maxPaidAmount = car.Fares.Any() ? car.Fares.Max(f => f.PaidAmount) : 0;
+            if (fare.PaidAmount > maxPaidAmount * 2)
             {
                 Console.WriteLine($"Warning: Fare cost exceeds double the maximum paid amount for this car!");
             }

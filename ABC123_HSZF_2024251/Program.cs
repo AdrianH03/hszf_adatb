@@ -9,6 +9,8 @@ using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.Graph.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
+using static System.Formats.Asn1.AsnWriter;
 
 class Program
 {
@@ -34,7 +36,7 @@ class Program
                 services.AddDbContext<TaxiDbContext>(options =>
                     options.UseSqlite("Data Source=TaxiDatabase.db",
                     sqliteOptions => sqliteOptions.MigrationsAssembly("ABC123_HSZF_2024251.Persistence.MsSql"))
-                    .LogTo(Console.WriteLine, LogLevel.Warning) // Csak figyelmeztetések és hibák
+                    .LogTo(Console.WriteLine, LogLevel.Warning).UseLazyLoadingProxies() // Csak figyelmeztetések és hibák
                 );
 
                 // Szolgáltatások regisztrációja

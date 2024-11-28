@@ -7,51 +7,37 @@ namespace ABC123_HSZF_2024251.Persistence.MsSql
 {
     public class TaxiDbContext : DbContext
     {
-        // Konstruktor
-        public TaxiDbContext(DbContextOptions<TaxiDbContext> options) : base(options)
+        public DbSet<TaxiCar> Cars { get; set; }
+        public DbSet<Fare> Fares { get; set; }
+        public DbSet<TaxiCar> TaxiCars { get; set; } = null!;
+
+        public TaxiDbContext(DbContextOptions<TaxiDbContext> options)
+            : base(options)
         {
         }
 
-        // DbSet-ek (táblák)
-        public DbSet<TaxiCar> TaxiCars { get; set; } = null!;
-        public DbSet<Fare> Fares { get; set; } = null!;
-
-        // Modell konfiguráció
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
-            // TaxiCar konfiguráció
             modelBuilder.Entity<TaxiCar>(entity =>
             {
-                entity.HasKey(tc => tc.Id);
-                entity.Property(tc => tc.LicensePlate)
-                    .IsRequired()
-                    .HasMaxLength(20);
-                entity.Property(tc => tc.Driver)
-                    .IsRequired()
-                    .HasMaxLength(100);
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.LicensePlate).IsRequired();
+                entity.Property(e => e.Driver).IsRequired();
 
-                // Kapcsolat
-                entity.HasMany(tc => tc.Fares)
-                    .WithOne(f => f.TaxiCar)
-                    .HasForeignKey(f => f.TaxiCarId);
+                // Egy autóhoz több fuvar tartozhat
+                entity.HasMany(e => e.Fares)
+                      .WithOne(e => e.Car)
+                      .HasForeignKey(e => e.TaxiCarId)
+                      .OnDelete(DeleteBehavior.Cascade);
             });
 
-            // Fare konfiguráció
             modelBuilder.Entity<Fare>(entity =>
             {
-                entity.HasKey(f => f.Id);
-                entity.Property(f => f.From)
-                    .IsRequired()
-                    .HasMaxLength(200);
-                entity.Property(f => f.To)
-                    .IsRequired()
-                    .HasMaxLength(200);
-                entity.Property(f => f.Distance)
-                    .IsRequired();
-                entity.Property(f => f.PaidAmount)
-                    .IsRequired();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.From).IsRequired();
+                entity.Property(e => e.To).IsRequired();
+                entity.Property(e => e.Distance).IsRequired();
+                entity.Property(e => e.PaidAmount).IsRequired();
             });
         }
     }

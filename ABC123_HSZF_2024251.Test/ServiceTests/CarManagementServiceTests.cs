@@ -48,7 +48,7 @@ public class CarManagementServiceTests
         // Assert
         var updatedCar = await dbContext.TaxiCars.Include(c => c.Fares).FirstOrDefaultAsync(c => c.LicensePlate == "ABC123");
         Assert.Single(updatedCar.Fares);
-        Assert.Equal("Point A", updatedCar.Fares[0].From);
+        Assert.Equal("Point A", updatedCar.Fares.First().From);
     }
 
     [Fact]
@@ -66,11 +66,11 @@ public class CarManagementServiceTests
             LicensePlate = "DEF456",
             Driver = "Jane Smith",
             Fares = new List<Fare>
-        {
-            new Fare { Distance = 10 },
-            new Fare { Distance = 20 },
-            new Fare { Distance = 30 }
-        }
+            {
+                new Fare { Distance = 10, From = "C", To = "D" },
+                new Fare { Distance = 20, From = "A", To = "B"  },
+                new Fare { Distance = 30, From = "E", To = "F"  }
+            }
         };
 
         dbContext.TaxiCars.Add(car);
@@ -83,5 +83,4 @@ public class CarManagementServiceTests
         Assert.Single(result);
         Assert.Equal(20.0, result["DEF456"]);
     }
-
 }

@@ -31,7 +31,6 @@ namespace ABC123_HSZF_2024251.Persistence.MsSql.Migrations
 
                     b.Property<string>("From")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("PaidAmount")
@@ -42,7 +41,6 @@ namespace ABC123_HSZF_2024251.Persistence.MsSql.Migrations
 
                     b.Property<string>("To")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -60,28 +58,26 @@ namespace ABC123_HSZF_2024251.Persistence.MsSql.Migrations
 
                     b.Property<string>("Driver")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LicensePlate")
                         .IsRequired()
-                        .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TaxiCars");
+                    b.ToTable("TaxiCar");
                 });
 
             modelBuilder.Entity("ABC123_HSZF_2024251.Model.Fare", b =>
                 {
-                    b.HasOne("ABC123_HSZF_2024251.Model.TaxiCar", "TaxiCar")
+                    b.HasOne("ABC123_HSZF_2024251.Model.TaxiCar", "Car")
                         .WithMany("Fares")
                         .HasForeignKey("TaxiCarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TaxiCar");
+                    b.Navigation("Car");
                 });
 
             modelBuilder.Entity("ABC123_HSZF_2024251.Model.TaxiCar", b =>

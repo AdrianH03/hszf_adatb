@@ -1,18 +1,34 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+using System;
 
 namespace ABC123_HSZF_2024251.Model
 {
     public class Fare
     {
-        public int Id { get; set; } // Primary Key
-        public string From { get; set; } = string.Empty; // Kiindulópont
-        public string To { get; set; } = string.Empty; // Úti cél
-        public double Distance { get; set; } // Távolság (km-ben)
-        public decimal PaidAmount { get; set; } // Fizetett összeg
-        public DateTime FareStartDate { get; set; } // Indulási idő
+        private ILazyLoader _lazyLoader;
+        private TaxiCar _car;
 
-        // Kapcsolódó TaxiCar azonosítója
-        public int TaxiCarId { get; set; } // Foreign Key
-        public TaxiCar TaxiCar { get; set; } = null!; // Navigációs tulajdonság
+        public Fare()
+        {
+        }
+
+        public Fare(ILazyLoader lazyLoader)
+        {
+            _lazyLoader = lazyLoader;
+        }
+
+        public int Id { get; set; }
+        public string From { get; set; }
+        public string To { get; set; }
+        public double Distance { get; set; }
+        public decimal PaidAmount { get; set; }
+        public DateTime FareStartDate { get; set; }
+
+        public int TaxiCarId { get; set; } // Idegen kulcs
+        public virtual TaxiCar Car
+        {
+            get => _lazyLoader.Load(this, ref _car);
+            set => _car = value;
+        }
     }
 }
