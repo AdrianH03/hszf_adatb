@@ -15,7 +15,7 @@ namespace ABC123_HSZF_2024251.Test.DataImporterTests
         private TaxiDbContext GetInMemoryDbContext()
         {
             var options = new DbContextOptionsBuilder<TaxiDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDb")
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
 
             return new TaxiDbContext(options);

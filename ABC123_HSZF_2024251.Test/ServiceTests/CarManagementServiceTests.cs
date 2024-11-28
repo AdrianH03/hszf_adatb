@@ -11,7 +11,7 @@ public class CarManagementServiceTests
     private TaxiDbContext GetInMemoryDbContext()
     {
         var options = new DbContextOptionsBuilder<TaxiDbContext>()
-            .UseInMemoryDatabase(databaseName: "TestDb")
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
         return new TaxiDbContext(options);
