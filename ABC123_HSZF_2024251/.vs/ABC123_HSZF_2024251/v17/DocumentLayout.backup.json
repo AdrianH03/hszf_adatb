@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Projektek\\hszf\\ABC123_HSZF_2024251\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B7CC8B4F-C52F-448C-B145-0558D56E83AE}|ABC123_HSZF_2024251.Console.csproj|c:\\projektek\\hszf\\abc123_hszf_2024251\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7CC8B4F-C52F-448C-B145-0558D56E83AE}|ABC123_HSZF_2024251.Console.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Projektek\\hszf\\ABC123_HSZF_2024251\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Projektek\\hszf\\ABC123_HSZF_2024251\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAMUAAAAAAAAAAAAwwM0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-24T02:10:28.949Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
