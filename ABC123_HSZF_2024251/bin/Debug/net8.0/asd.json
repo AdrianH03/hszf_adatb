@@ -1,0 +1,37 @@
+{
+    "TaxiCars": [
+        {
+            "LicensePlate": "DA AA-333",
+            "Driver": "Bartos Csaba István",
+            "Fares": [
+                {
+                    "From": "Budapest, Népliget",
+                    "To": "Dabas, buszállomás",
+                    "Distance": 50,
+                    "PaidAmount": 22000,
+                    "FareStartDate": "2024-08-15T00:00:00Z"
+                },
+                {
+                    "From": "Kőbánya-Kispest",
+                    "To": "Monor",
+                    "Distance": 30,
+                    "FareStartDate": "2024-08-20T22:00:00Z",
+                    "PaidAmount": 42100
+                }
+            ]
+        },
+        {
+            "Driver": "Lakatos Brendon",
+            "LicensePlate": "RO LF-432",
+            "Services": [
+                {
+                    "From": "Miskolc",
+                    "To": "Felsőzsolca",
+                    "Distance": 32,
+                    "PaidAmount": 250000,
+                    "FareStartDate": "2024-04-01T14:00:00Z"
+                }
+            ]
+        }
+    ]
+}

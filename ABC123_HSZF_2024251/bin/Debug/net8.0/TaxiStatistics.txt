@@ -1,0 +1,11 @@
+Short Trips Count (< 10 km):
+RO LF-432: 0
+
+Average Distance:
+RO LF-432: 121,00 km
+
+Longest and Shortest Trips:
+RO LF-432: Longest trip: 210 km, Shortest trip: 20 km
+
+Most Common Destination:
+RO LF-432: Dabas
